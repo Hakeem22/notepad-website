@@ -7,8 +7,8 @@ class Homepage {
     private $loginRejectionMessage;
     private $connection;
 
-    public function __construct($conn) {
-        $this->connection = $conn;
+    public function __construct($connection) {
+        $this->connection = $connection;
     }
 
     public function checkRequest() {
@@ -23,7 +23,7 @@ class Homepage {
         $this->closeConnection();
     }
 
-    public function checkLoginValidation() {
+    private function checkLoginValidation() {
         $enterEmailAddress = $_POST['email'];
         $enteredPassword = $_POST['pw'];
 
@@ -35,15 +35,15 @@ class Homepage {
         if ($result->num_rows > 0) {
             $_SESSION['logged_in'] = $enterEmailAddress;
             while($row = $result->fetch_assoc()) {
-                $this->noteText = $row['text1'];
-                $this->noteSubject = $row['subject1'];
+                $this->setNoteText($row['text1']);
+                $this->setNoteSubject($row['subject1']);
             }
         } else {
-            $this->loginRejectionMessage = "<center><br><b>Invalid username or password.</b></center>";
+            $this->setLoginRejectionMessage("<center><br><b>Invalid username or password.</b></center>");
         }
     }
 
-    public function loadNotes() {
+    private function loadNotes() {
         $sessionEmailAddress = $_SESSION['logged_in'];
         $selectedNote = $_POST['notes'];
 
@@ -60,13 +60,13 @@ class Homepage {
 
         if ($result->num_rows > 0) {
             while($info = $result->fetch_assoc()) {
-                $this->noteText = $info[$text];
-                $this->noteSubject = $info[$sub];
+                $this->setNoteText($info[$text]);
+                $this->setNoteSubject($info[$sub]);
             }
         }
     }
 
-    public function saveButton() {
+    private function saveButton() {
         $noteText = $_POST['textArea'];
         $emailAddress = $_SESSION['logged_in'];
         $noteSubject = $_POST['subject'];
@@ -78,8 +78,8 @@ class Homepage {
         $stmt->bind_param("sss", $noteText, $noteSubject, $emailAddress);
         $stmt->execute();
 
-        $this->noteText = $noteText;
-        $this->noteSubject = $noteSubject;
+        $this->setNoteText($noteText);
+        $this->setNoteSubject($noteSubject);
     }
 
     private function closeConnection() {
@@ -96,6 +96,18 @@ class Homepage {
 
     public function getNoteText() {
         return $this->noteText;
+    }
+
+    public function setNoteText($noteText) {
+        $this->noteText = $noteText;
+    }
+
+    public function setNoteSubject($noteSubject) {
+        $this->noteSubject = $noteSubject;
+    }
+
+    public function setLoginRejectionMessage($loginRejectionMessage) {
+        $this->loginRejectionMessage = $loginRejectionMessage;
     }
 
 }
