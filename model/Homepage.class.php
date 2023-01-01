@@ -27,7 +27,7 @@ class Homepage {
         $enterEmailAddress = $_POST['email'];
         $enteredPassword = $_POST['pw'];
 
-        $stmt = $this->connection->prepare("SELECT * FROM users WHERE email=? AND password=?");
+        $stmt = $this->connection->prepare("SELECT * FROM users WHERE email_address=? AND password=?");
         $stmt->bind_param("ss", $enterEmailAddress, $enteredPassword);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -47,7 +47,7 @@ class Homepage {
         $sessionEmailAddress = $_SESSION['logged_in'];
         $selectedNote = $_POST['notes'];
 
-        $stmt = $this->connection->prepare("SELECT * FROM users WHERE email=?");
+        $stmt = $this->connection->prepare("SELECT * FROM users WHERE email_address=?");
         $stmt->bind_param("s", $sessionEmailAddress);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -74,7 +74,7 @@ class Homepage {
         $nindex = $_SESSION['note_index'];
         $sindex= $_SESSION['subject_index'];
 
-        $stmt = $this->connection->prepare("UPDATE users SET $nindex=?, $sindex=? WHERE email=?");
+        $stmt = $this->connection->prepare("UPDATE users SET $nindex=?, $sindex=? WHERE email_address=?");
         $stmt->bind_param("sss", $noteText, $noteSubject, $emailAddress);
         $stmt->execute();
 
