@@ -1,6 +1,6 @@
 <?php
 include 'dbconfig.php';
-include "model/Homepage.class.php";
+include "classes/Homepage.class.php";
 $title= "Homepage";
 include "header.php";
 $homepage = new Homepage($connection);
@@ -83,11 +83,12 @@ $homepage->checkRequest();
                 </form>
                 <br><br><button type="submit" name="loadNotes">Load Note</button>
 
-                <br><br><label va>Title:</label><br>
-                <input type="text" id="subject" name="subject" value="<?php echo $homepage->getNoteSubject() ?>" style="width: 713px;">
+                <br><br><label va>You are updating note: <?php echo str_replace("text", "", $_SESSION['note_index']) ?></label>
+                <br><label va>Title:</label><br>
+                <input type="text" id="subject" name="subject" value="<?php echo $homepage->getNotes()->getNoteSubject() ?>" style="width: 713px;">
 
                 <br><label>Note:</label><br>
-                <textarea name="textArea" rows="20" cols="100"><?php echo $homepage->getNoteText(); ?></textarea><br>
+                <textarea name="textArea" rows="20" cols="100"><?php echo $homepage->getNotes()->getNoteText(); ?></textarea><br>
                 <button type="submit" name="saveButton">Save Text</button>
             </center>
         </form>
