@@ -8,24 +8,28 @@ class Homepage {
 
     /**
      * This will hold the Notes object
+     *
      * @var Notes The notes object.
      */
     private Notes $notes;
 
     /**
      * The login rejection message that will show to the end user if they were to login with incorrect credentials.
+     *
      * @var This will return the rejection message.
      */
     private $loginRejectionMessage;
 
     /**
      * This creates the connection object to send and receive information to the database.
+     *
      * @var The connection object.
      */
     private $connection;
 
     /**
      * Creates a new constructor for when the class has a new object created.
+     *
      * @param $connection The connection object.
      */
     public function __construct($connection) {
@@ -34,6 +38,7 @@ class Homepage {
 
     /**
      * This will check the incoming request and will divert to the correct method.
+     *
      * @return void This method starts a session, checks conditions and closes the connection object.
      */
     public function checkRequest() {
@@ -50,6 +55,7 @@ class Homepage {
 
     /**
      * This method will check the login credentials the end user has inputted and validate to what is in the database.
+     *
      * @return void It will check the database to see if the user has an account with  us, if not a rejection message will be allocated.
      */
     private function checkLoginValidation() {
@@ -75,6 +81,7 @@ class Homepage {
 
     /**
      * This method will load the notes that the end user has stored historically.
+     *
      * @return void Grabs the information from the database and returns the note text and subject.
      */
     private function loadNotes() {
@@ -101,6 +108,7 @@ class Homepage {
 
     /**
      * This method will save the new content that the end user has inputted into the subject and notes field.
+     *
      * @return void This method will update the information in the database.
      */
     private function saveButton() {
@@ -120,6 +128,7 @@ class Homepage {
 
     /**
      * This method will close the connection object.
+     *
      * @return void This will close the connection object.
      */
     private function closeConnection() {
@@ -128,6 +137,7 @@ class Homepage {
 
     /**
      * This will grab the login rejection message and output this to the main page.
+     *
      * @return String The allocated login rejection message or could return as null as login was successful.
      */
     public function getLoginRejectionMessage() {
@@ -136,7 +146,9 @@ class Homepage {
 
     /**
      * This will set the login rejection message if the end user was to place incorrect credentials during the login process.
+     *
      * @param $loginRejectionMessage The allocated rejection message.
+     *
      * @return void Sets the allocated rejection message.
      */
     public function setLoginRejectionMessage($loginRejectionMessage) {
@@ -145,6 +157,7 @@ class Homepage {
 
     /**
      * This will grab the Notes object.
+     *
      * @return Notes The notes object or this could return as null if nothing has been allocated..
      */
     public function getNotes()  {
@@ -153,7 +166,9 @@ class Homepage {
 
     /**
      * This will set a Notes object.
+     *
      * @param Notes $notes The notes object.
+     *
      * @return void Sets the note object.
      */
     public function setNotes(Notes $notes) {

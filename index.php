@@ -6,11 +6,8 @@ include "header.php";
 $homepage = new Homepage($connection);
 $homepage->checkRequest();
 ?>
-
 <html>
-
 <div id="navigation_bar">
-
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -35,24 +32,19 @@ $homepage->checkRequest();
             </ul>
         </div>
     </nav>
-
 </div>
 
 <div id="login_box">
-
     <?php
-
-    if (!isset($_SESSION['logged_in'])) { ?>
+    if (!isset($_SESSION['logged_in'])) {
+        ?>
         <center><h1>Login</h1>
         <p>Please fill in this form to login to your account.</p></center>
         <hr>
-
         <?php
     }
     ?>
-
     <?php
-
     if (!isset($_SESSION['logged_in'])) {?>
    <center>
        <form action="" method="post">
@@ -64,14 +56,12 @@ $homepage->checkRequest();
         <input type="password" placeholder="Enter Password" name="pw" required>
 
         <button type="submit" class="loginbtn" name="submit">Login</button>
-
     </form>
    </center>
-
         <?php
         echo $homepage->getLoginRejectionMessage();
-    } else {?>
-
+    } else {
+        ?>
         <form method="post">
             <center>
                 <form>
@@ -92,9 +82,6 @@ $homepage->checkRequest();
                 <button type="submit" name="saveButton">Save Text</button>
             </center>
         </form>
-
     <?php } ?>
-
 </div>
-
 </html>
