@@ -11,7 +11,7 @@ $homepage->checkRequest();
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="./index.php">Notepad</a>
+                <a class="navbar-brand" href="./index.php">Notepad Application</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="./index.php">Home</a></li>
@@ -49,13 +49,13 @@ $homepage->checkRequest();
    <center>
        <form action="" method="post">
 
-        <label for="email"><b>Email Address:</b></label>
-        <input type="text" placeholder="Enter Email" name="email" required>
+        <label for="email"><b>Email Address</b></label><br>
+        <input type="text" placeholder="Enter Email" name="email" required><br>
 
-        <label for="pw"><b>Password:</b></label>
-        <input type="password" placeholder="Enter Password" name="pw" required>
+        <label for="pw"><b>Password</b></label><br>
+        <input type="password" placeholder="Enter Password" name="pw" required><br><br>
 
-        <button type="submit" class="loginbtn" name="submit">Login</button>
+        <button type="submit" class="btn" name="submit">Login</button>
     </form>
    </center>
         <?php
