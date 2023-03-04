@@ -19,8 +19,8 @@ $homepage->checkRequest();
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <?php
-
-                if (!isset($_SESSION['logged_in'])) { ?>
+                if (!isset($_SESSION['logged_in'])) {
+                    ?>
                     <li><a href="./register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                     <li><a href="./index.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     <?php
@@ -73,7 +73,7 @@ $homepage->checkRequest();
                 </form>
                 <br><br><button type="submit" name="loadNotes">Load Note</button>
 
-                <br><br><label va>You are updating note: <?php echo str_replace("text", "", $_SESSION['note_index']) ?></label>
+                <br><br><label va>You are updating Note <?php echo str_replace("text", "", $_SESSION['note_index']) ?></label>
                 <br><label va>Title:</label><br>
                 <input type="text" id="subject" name="subject" value="<?php echo $homepage->getNotes()->getNoteSubject() ?>" style="width: 713px;">
 

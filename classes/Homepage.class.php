@@ -62,10 +62,10 @@ class Homepage {
         $enterEmailAddress = $_POST['email'];
         $enteredPassword = $_POST['pw'];
 
-        $stmt = $this->connection->prepare("SELECT * FROM users WHERE email_address=? AND password=?");
-        $stmt->bind_param("ss", $enterEmailAddress, $enteredPassword);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $sqlStatement = $this->connection->prepare("SELECT * FROM users WHERE email_address=? AND password=?");
+        $sqlStatement->bind_param("ss", $enterEmailAddress, $enteredPassword);
+        $sqlStatement->execute();
+        $result = $sqlStatement->get_result();
 
         if ($result->num_rows > 0) {
             $_SESSION['note_index'] = "text1";
@@ -88,10 +88,10 @@ class Homepage {
         $sessionEmailAddress = $_SESSION['logged_in'];
         $selectedNote = $_POST['notes'];
 
-        $stmt = $this->connection->prepare("SELECT * FROM users WHERE email_address=?");
-        $stmt->bind_param("s", $sessionEmailAddress);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $sqlStatement = $this->connection->prepare("SELECT * FROM users WHERE email_address=?");
+        $sqlStatement->bind_param("s", $sessionEmailAddress);
+        $sqlStatement->execute();
+        $result = $sqlStatement->get_result();
 
         $text = "text$selectedNote";
         $sub = "subject$selectedNote";
@@ -116,10 +116,10 @@ class Homepage {
         $emailAddress = $_SESSION['logged_in'];
         $noteSubject = $_POST['subject'];
 
-        $nindex = $_SESSION['note_index'];
-        $sindex= $_SESSION['subject_index'];
+        $noteIndex = $_SESSION['note_index'];
+        $subjectIndex= $_SESSION['subject_index'];
 
-        $stmt = $this->connection->prepare("UPDATE users SET $nindex=?, $sindex=? WHERE email_address=?");
+        $stmt = $this->connection->prepare("UPDATE users SET $noteIndex=?, $subjectIndex=? WHERE email_address=?");
         $stmt->bind_param("sss", $noteText, $noteSubject, $emailAddress);
         $stmt->execute();
 
