@@ -15,7 +15,7 @@ $homepage->checkRequest();
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="./index.php">Home</a></li>
-<!--                <li><a href="./notes.php">Notes</a></li>-->
+                <li><a href="./notes.php">Notes</a></li> <!-- TODO What you see on the main page is what you will see in notes.php and the main page will change-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <?php
@@ -38,49 +38,46 @@ $homepage->checkRequest();
     <?php
     if (!isset($_SESSION['logged_in'])) {
         ?>
-        <center><h1>Login</h1>
-        <p>Please fill in this form to login to your account.</p></center>
+        <h1>Login</h1>
+        <p>Please fill in this form to login to your account.</p>
         <hr>
         <?php
     }
     ?>
     <?php
     if (!isset($_SESSION['logged_in'])) {?>
-   <center>
-       <form action="" method="post">
+        <form action="" method="post">
 
-        <label for="email"><b>Email Address</b></label><br>
-        <input type="text" placeholder="Enter Email" name="email" required><br>
+            <label for="email"><b>Email Address</b></label>
+            <input type="text" placeholder="Enter Email" name="email" required>
 
-        <label for="pw"><b>Password</b></label><br>
-        <input type="password" placeholder="Enter Password" name="pw" required><br><br>
+            <label for="pw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="pw" required>
 
-        <button type="submit" class="btn" name="submit">Login</button>
-    </form>
-   </center>
+            <button type="submit" class="btn" name="submit">Login</button>
+        </form>
         <?php
         echo $homepage->getLoginRejectionMessage();
     } else {
         ?>
         <form method="post">
-            <center>
-                <form>
-                    <select name="notes">
-                        <option value="1">Note 1</option>
-                        <option value="2">Note 2</option>
-                        <option value="3">Note 3</option>
-                    </select>
-                </form>
-                <br><br><button type="submit" name="loadNotes">Load Note</button>
+            <label>Please select the note you would like to load</label>
+            <form>
+                <select name="notes">
+                    <option value="1">Note 1</option>
+                    <option value="2">Note 2</option>
+                    <option value="3">Note 3</option>
+                </select>
+            </form>
+            <button type="submit" name="loadNotes">Load Note</button>
 
-                <br><br><label va>You are updating Note <?php echo str_replace("text", "", $_SESSION['note_index']) ?></label>
-                <br><label va>Title:</label><br>
-                <input type="text" id="subject" name="subject" value="<?php echo $homepage->getNotes()->getNoteSubject() ?>" style="width: 713px;">
+            <label>You are updating Note <?php echo str_replace("text", "", $_SESSION['note_index']) ?></label>
+            <label>Title:</label>
+            <input type="text" id="subject" name="subject" value="<?php echo $homepage->getNotes()->getNoteSubject() ?>" style="width: 713px;">
 
-                <br><label>Note:</label><br>
-                <textarea name="textArea" rows="20" cols="100"><?php echo $homepage->getNotes()->getNoteText(); ?></textarea><br>
-                <button type="submit" name="saveButton">Save Text</button>
-            </center>
+            <label>Note:</label>
+            <textarea name="textArea" rows="20" cols="100"><?php echo $homepage->getNotes()->getNoteText(); ?></textarea>
+            <button type="submit" name="saveButton">Save Text</button>
         </form>
     <?php } ?>
 </div>
