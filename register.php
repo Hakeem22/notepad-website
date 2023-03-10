@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
     $password = $_POST['pw'];
     $_SESSION['logged_in'] = $emailAddress;
 
-    $sqlStatement = $connection->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
+    $sqlStatement = $connection->prepare("INSERT INTO users (name, email_address, password) VALUES (?, ?, ?)");
     $sqlStatement->bind_param("sss", $name, $emailAddress, $password);
     $sqlStatement->execute();
 
