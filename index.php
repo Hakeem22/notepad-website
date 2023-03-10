@@ -34,7 +34,7 @@ $homepage->checkRequest();
     </nav>
 </div>
 
-<div id="login_box">
+<div id="login_box_container">
     <?php
     if (!isset($_SESSION['logged_in'])) {
         ?>
@@ -46,39 +46,41 @@ $homepage->checkRequest();
     ?>
     <?php
     if (!isset($_SESSION['logged_in'])) {?>
-        <form action="" method="post">
+        <div id="login_box">
+            <form action="" method="post">
 
-            <label for="email"><b>Email Address</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
+                <label for="email"><b>Email Address</b></label>
+                <input type="text" placeholder="Enter Email Address Here" name="email" required>
 
-            <label for="pw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="pw" required>
+                <label for="pw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password Here" name="pw" required>
 
-            <button type="submit" class="btn" name="submit">Login</button>
-        </form>
+                <button type="submit" class="btn" name="submit">Login</button>
+            </form>
+        </div>
         <?php
         echo $homepage->getLoginRejectionMessage();
     } else {
         ?>
-        <form method="post">
-            <label>Please select the note you would like to load</label>
-            <form>
-                <select name="notes">
-                    <option value="1">Note 1</option>
-                    <option value="2">Note 2</option>
-                    <option value="3">Note 3</option>
-                </select>
+        <div id="logged_in_login_box">
+            <form method="post">
+                <label>Please select the note you would like to load</label>
+                    <select name="notes">
+                        <option value="1">Note 1</option>
+                        <option value="2">Note 2</option>
+                        <option value="3">Note 3</option>
+                    </select>
+                <button type="submit" name="loadNotes">Load Note</button>
+
+                <label>You are updating Note <?php echo str_replace("text", "", $_SESSION['note_index']) ?></label>
+                <label>Title:</label>
+                <input type="text" id="subject" name="subject" value="<?php echo $homepage->getNotes()->getNoteSubject() ?>">
+
+                <label>Note:</label>
+                <textarea name="textArea" rows="20" cols="100"><?php echo $homepage->getNotes()->getNoteText(); ?></textarea>
+                <button type="submit" name="saveButton">Save Text</button>
             </form>
-            <button type="submit" name="loadNotes">Load Note</button>
-
-            <label>You are updating Note <?php echo str_replace("text", "", $_SESSION['note_index']) ?></label>
-            <label>Title:</label>
-            <input type="text" id="subject" name="subject" value="<?php echo $homepage->getNotes()->getNoteSubject() ?>" style="width: 713px;">
-
-            <label>Note:</label>
-            <textarea name="textArea" rows="20" cols="100"><?php echo $homepage->getNotes()->getNoteText(); ?></textarea>
-            <button type="submit" name="saveButton">Save Text</button>
-        </form>
+        </div>
     <?php } ?>
 </div>
 </html>

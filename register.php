@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
 }
 ?>
 <html>
-<div id="login_box">
+<div id="login_box_container">
     <center>
         <h1>Register</h1>
         <p>Please fill in this form to create an account.</p>
