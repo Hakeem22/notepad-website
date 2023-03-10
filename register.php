@@ -19,22 +19,20 @@ if (isset($_POST['submit'])) {
 ?>
 <html>
 <div id="login_box_container">
-    <center>
-        <h1>Register</h1>
-        <p>Please fill in this form to create an account.</p>
-        <hr>
-        <form action="" method="post">
-            <label for="name"><b>Your Name:</b></label>
-            <input type="text" placeholder="Enter Name" name="name" required>
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+    <form action="" method="post">
+        <label for="name"><b>Your Name:</b></label>
+        <input type="text" placeholder="Enter Name" name="name" required>
 
-            <label for="email"><b>Email Address:</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
+        <label for="email"><b>Email Address:</b></label>
+        <input type="text" placeholder="Enter Email" name="email" required>
 
-            <label for="pw"><b>Password:</b></label>
-            <input type="password" placeholder="Enter Password" name="pw" required>
+        <label for="pw"><b>Password:</b></label>
+        <input type="password" placeholder="Enter Password" name="pw" required>
 
-            <button type="submit" class="registerbtn" name="submit">Register</button>
-        </form>
-    </center>
+        <button type="submit" class="registerbtn" name="submit">Register</button>
+    </form>
 </div>
 </html>
