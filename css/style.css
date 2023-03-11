@@ -16,3 +16,22 @@
     margin: 8px 0;
     box-sizing: border-box;
 }
+#logged_in_login_box {
+    text-align: center;
+}
+.custom_load_notes {
+    display:block;
+    margin-left: 45%;
+    margin-top: 10px;
+}
+.custom_note_subject {
+    display: block;
+    margin-top: 5px;
+}
+.custom_text {
+    margin-top: 10px;
+    display: block;
+}
+.custom_save_text {
+    margin-top: 10px;
+}

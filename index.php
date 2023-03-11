@@ -14,7 +14,7 @@ $homepage->checkRequest();
                 <a class="navbar-brand" href="./index.php">Notepad Application</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="./index.php">Home</a></li>
+                <li class="active"><a href="./index.php">Home</a></li> <!-- TODO Whilst on the homepage when you click Home it no longer shows the -->
                 <li><a href="./notes.php">Notes</a></li> <!-- TODO What you see on the main page is what you will see in notes.php and the main page will change-->
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -63,22 +63,21 @@ $homepage->checkRequest();
     } else {
         ?>
         <div id="logged_in_login_box">
+            <label>Please select the note you would like to load below</label>
             <form method="post">
-                <label>Please select the note you would like to load</label>
-                    <select name="notes">
+                <select name="notes">
                         <option value="1">Note 1</option>
                         <option value="2">Note 2</option>
                         <option value="3">Note 3</option>
                     </select>
-                <button type="submit" name="loadNotes">Load Note</button>
-
-                <label>You are updating Note <?php echo str_replace("text", "", $_SESSION['note_index']) ?></label>
-                <label>Title:</label>
+                <button type="submit" name="loadNotes" class="custom_load_notes">Load Note</button
+                <label>You have loaded Note <?php echo str_replace("text", "", $_SESSION['note_index']) ?>!</label>
+                <label class="custom_note_subject">Note Subject:</label>
                 <input type="text" id="subject" name="subject" value="<?php echo $homepage->getNotes()->getNoteSubject() ?>">
 
-                <label>Note:</label>
+                <label class="custom_text">The details to your note</label>
                 <textarea name="textArea" rows="20" cols="100"><?php echo $homepage->getNotes()->getNoteText(); ?></textarea>
-                <button type="submit" name="saveButton">Save Text</button>
+                <button type="submit" name="saveButton" class="custom_save_text">Save Text</button>
             </form>
         </div>
     <?php } ?>
