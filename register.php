@@ -10,9 +10,13 @@ if (isset($_POST['submit'])) {
     $password = $_POST['pw'];
     $_SESSION['logged_in'] = $emailAddress;
 
-    $sqlStatement = $connection->prepare("INSERT INTO users (name, email_address, password) VALUES (?, ?, ?)");
-    $sqlStatement->bind_param("sss", $name, $emailAddress, $password);
-    $sqlStatement->execute();
+    $insertUsers = $connection->prepare("INSERT INTO users (name, email_address, password) VALUES (?, ?, ?)");
+    $insertUsers->bind_param("sss", $name, $emailAddress, $password);
+    $insertUsers->execute();
+
+    $insertNotes = $connection->prepare("INSERT INTO notes (email_address) VALUES (?)");
+    $insertNotes->bind_param("s", $emailAddress, );
+    $insertNotes->execute();
 
     $connection->close();
 }

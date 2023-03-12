@@ -62,16 +62,22 @@ class Homepage {
         $enterEmailAddress = $_POST['email'];
         $enteredPassword = $_POST['pw'];
 
-        $sqlStatement = $this->connection->prepare("SELECT * FROM users WHERE email_address=? AND password=?");
-        $sqlStatement->bind_param("ss", $enterEmailAddress, $enteredPassword);
-        $sqlStatement->execute();
-        $result = $sqlStatement->get_result();
+        $selectUsers = $this->connection->prepare("SELECT * FROM users WHERE email_address=? AND password=?");
+        $selectUsers->bind_param("ss", $enterEmailAddress, $enteredPassword);
+        $selectUsers->execute();
+        $result = $selectUsers->get_result();
 
         if ($result->num_rows > 0) {
             $_SESSION['note_index'] = "text1";
             $_SESSION['subject_index'] = "subject1";
             $_SESSION['logged_in'] = $enterEmailAddress;
-            while($row = $result->fetch_assoc()) {
+
+            $selectNotes = $this->connection->prepare("SELECT * FROM notes WHERE email_address=?");
+            $selectNotes->bind_param("s", $enterEmailAddress);
+            $selectNotes->execute();
+            $results = $selectNotes->get_result();
+
+            while($row = $results->fetch_assoc()) {
                 $this->setNotes(new Notes($row['text1'], $row['subject1']));
             }
         } else {
@@ -88,7 +94,7 @@ class Homepage {
         $sessionEmailAddress = $_SESSION['logged_in'];
         $selectedNote = $_POST['notes'];
 
-        $sqlStatement = $this->connection->prepare("SELECT * FROM users WHERE email_address=?");
+        $sqlStatement = $this->connection->prepare("SELECT * FROM notes WHERE email_address=?");
         $sqlStatement->bind_param("s", $sessionEmailAddress);
         $sqlStatement->execute();
         $result = $sqlStatement->get_result();
@@ -119,7 +125,7 @@ class Homepage {
         $noteIndex = $_SESSION['note_index'];
         $subjectIndex= $_SESSION['subject_index'];
 
-        $stmt = $this->connection->prepare("UPDATE users SET $noteIndex=?, $subjectIndex=? WHERE email_address=?");
+        $stmt = $this->connection->prepare("UPDATE notes SET $noteIndex=?, $subjectIndex=? WHERE email_address=?");
         $stmt->bind_param("sss", $noteText, $noteSubject, $emailAddress);
         $stmt->execute();
 
