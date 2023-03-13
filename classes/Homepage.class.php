@@ -1,17 +1,9 @@
 <?php
-include("Notes.class.php");
 
 /**
  * @author Hakeem
  */
 class Homepage {
-
-    /**
-     * This will hold the Notes object
-     *
-     * @var Notes The notes object.
-     */
-    private Notes $notes;
 
     /**
      * The login rejection message that will show to the end user if they were to login with incorrect credentials.
@@ -78,7 +70,8 @@ class Homepage {
             $results = $selectNotes->get_result();
 
             while($row = $results->fetch_assoc()) {
-                $this->setNotes(new Notes($row['text1'], $row['subject1']));
+                $_SESSION['note_text'] = $row['text1'];
+                $_SESSION['note_subject'] = $row['subject1'];
             }
         } else {
             $this->setLoginRejectionMessage("<center><br><b>Invalid username or password.</b></center>");
@@ -106,8 +99,9 @@ class Homepage {
         $_SESSION['subject_index'] = $sub;
 
         if ($result->num_rows > 0) {
-            while($info = $result->fetch_assoc()) {
-                $this->setNotes(new Notes($info[$text], $info[$sub]));
+            while($row = $result->fetch_assoc()) {
+                $_SESSION['note_text'] = $row[$text];
+                $_SESSION['note_subject'] = $row[$sub];
             }
         }
     }
@@ -129,7 +123,8 @@ class Homepage {
         $stmt->bind_param("sss", $noteText, $noteSubject, $emailAddress);
         $stmt->execute();
 
-        $this->setNotes(new Notes($noteText, $noteSubject));
+        $_SESSION['note_text'] = $noteText;
+        $_SESSION['note_subject'] = $noteSubject;
     }
 
     /**
@@ -159,26 +154,6 @@ class Homepage {
      */
     public function setLoginRejectionMessage($loginRejectionMessage) {
         $this->loginRejectionMessage = $loginRejectionMessage;
-    }
-
-    /**
-     * This will grab the Notes object.
-     *
-     * @return Notes The notes object or this could return as null if nothing has been allocated..
-     */
-    public function getNotes()  {
-        return $this->notes;
-    }
-
-    /**
-     * This will set a Notes object.
-     *
-     * @param Notes $notes The notes object.
-     *
-     * @return void Sets the note object.
-     */
-    public function setNotes(Notes $notes) {
-        $this->notes = $notes;
     }
 
 }

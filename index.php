@@ -71,12 +71,12 @@ $homepage->checkRequest();
                         <option value="3">Note 3</option>
                     </select>
                 <button type="submit" name="loadNotes" class="custom_load_notes">Load Note</button
-                <label>You have loaded Note <?php echo str_replace("text", "", $_SESSION['note_index']) ?>!</label>
+                <label>You are currently editing Note <?php echo str_replace("text", "", $_SESSION['note_index']) ?>!</label>
                 <label class="custom_note_subject">Note Subject:</label>
-                <input type="text" id="subject" name="subject" value="<?php echo $homepage->getNotes()->getNoteSubject() ?>">
+                <input type="text" id="subject" name="subject" value="<?php echo $_SESSION['note_subject'] ?>">
 
                 <label class="custom_text">The details to your note</label>
-                <textarea name="textArea" rows="20" cols="100"><?php echo $homepage->getNotes()->getNoteText(); ?></textarea>
+                <textarea name="textArea" rows="20" cols="100"><?php echo $_SESSION['note_text'] ?></textarea>
                 <button type="submit" name="saveButton" class="custom_save_text">Save Text</button>
             </form>
         </div>
